@@ -1,4 +1,4 @@
-from django.conf.urls import patterns
+from django.conf.urls import *
 from django.contrib import admin
 from django.core.context_processors import csrf
 from django.http import HttpResponse
@@ -75,10 +75,11 @@ def get_admin_urls(urls):
     Appends the console and post urls to the url patterns
     """
     def get_urls():
-        my_urls = patterns('',
-                           (r'^console/$', admin.site.admin_view(console)),
-                           (r'^console/post/$', admin.site.admin_view(console_post)))
-        return my_urls + urls
+        urlpatterns = [
+            url(r'^console/$', admin.site.admin_view(console)),
+            url(r'^console/post/$', admin.site.admin_view(console_post)),
+
+        return urlpatterns + urls
 
     return get_urls
 
